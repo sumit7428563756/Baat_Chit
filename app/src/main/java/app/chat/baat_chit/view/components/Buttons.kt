@@ -1,4 +1,4 @@
-package app.chat.baat_chit.components
+package app.chat.baat_chit.view.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -14,8 +14,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import app.chat.baat_chit.navigation.Screens
-import app.chat.baat_chit.ui.theme.DeepPurple
 import app.chat.baat_chit.ui.theme.Purple
 
 @Composable

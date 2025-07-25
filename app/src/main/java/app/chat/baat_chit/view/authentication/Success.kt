@@ -1,4 +1,4 @@
-package app.chat.baat_chit.View.authentication
+package app.chat.baat_chit.view.authentication
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import app.chat.baat_chit.R
-import app.chat.baat_chit.components.LoginButton
+import app.chat.baat_chit.view.components.LoginButton
 
 @Composable
 fun Success(navController: NavController){

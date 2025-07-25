@@ -1,4 +1,4 @@
-package app.chat.baat_chit.View.authentication
+package app.chat.baat_chit.view.authentication
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
