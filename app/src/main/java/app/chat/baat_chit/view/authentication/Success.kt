@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import app.chat.baat_chit.R
+import app.chat.baat_chit.navigation.Screens
 import app.chat.baat_chit.view.components.LoginButton
 
 @Composable
@@ -87,7 +88,7 @@ fun Success(navController: NavController){
         )
         Spacer(modifier = Modifier.height(50.dp))
         LoginButton(name = "OKAY") {
-            
+            navController.navigate(Screens.Home.route)
         }
     }
 }

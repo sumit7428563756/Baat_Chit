@@ -31,6 +31,6 @@ val Purple2 = Color(0xFF9B5BE5)
 
 
 val gradientBrush = Brush.horizontalGradient(
-    colors = listOf(Purple1, Purple2)
+    colors = listOf(Purple1, Purple2, Purple)
 )
 

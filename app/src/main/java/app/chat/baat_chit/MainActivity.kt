@@ -9,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import app.chat.baat_chit.data.model.sample
 import app.chat.baat_chit.navigation.Nav
 import app.chat.baat_chit.ui.theme.Baat_ChitTheme
 
@@ -20,9 +21,10 @@ class MainActivity : ComponentActivity() {
         installSplashScreen()
         setContent {
             Baat_ChitTheme {
+                val user = sample
                 Surface(modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background){
-                       Nav()
+                       Nav(user = user)
                 }
             }
         }
