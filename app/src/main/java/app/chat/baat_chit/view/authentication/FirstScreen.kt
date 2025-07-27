@@ -35,6 +35,7 @@ import androidx.navigation.NavController
 import app.chat.baat_chit.R
 import app.chat.baat_chit.view.components.LoginButton
 import app.chat.baat_chit.ui.theme.Purple
+import app.chat.baat_chit.ui.theme.Purple1
 
 @Composable
 fun First(navController: NavController) {
@@ -99,8 +100,8 @@ fun First(navController: NavController) {
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.White,
                 unfocusedContainerColor = Color.White,
-                focusedIndicatorColor = Purple,
-                unfocusedIndicatorColor = Purple,
+                focusedIndicatorColor = Purple1,
+                unfocusedIndicatorColor = Purple1,
                 focusedTextColor = Color.Black, unfocusedTextColor = Color.Black
             ),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),

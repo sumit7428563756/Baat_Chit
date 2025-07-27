@@ -44,6 +44,7 @@ import androidx.navigation.NavController
 import app.chat.baat_chit.R
 import app.chat.baat_chit.navigation.Screens
 import app.chat.baat_chit.ui.theme.Purple
+import app.chat.baat_chit.ui.theme.Purple1
 import app.chat.baat_chit.ui.theme.Purple80
 
 @Composable
@@ -109,7 +110,7 @@ fun OtpScreen(navController: NavController,number : String) {
                     textAlign = TextAlign.Center,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
-                    color = Purple
+                    color = Purple1
                 )
             }
 
@@ -193,12 +194,12 @@ fun OtpInput(
                 singleLine = true,
                 maxLines = 1,
                 colors = TextFieldDefaults.colors(
-                  unfocusedContainerColor = if (isFilled) Purple else Purple80,
+                  unfocusedContainerColor = if (isFilled) Purple1 else Purple80,
                     focusedTextColor = Color.White,
                     unfocusedTextColor = Color.White,
-                    focusedContainerColor = if (isFilled) Purple else Purple80,
-                   focusedIndicatorColor  = if (isFilled) Purple else Purple80,
-                    unfocusedIndicatorColor = if (isFilled) Purple else Purple80,
+                    focusedContainerColor = if (isFilled) Purple1 else Purple80,
+                   focusedIndicatorColor  = if (isFilled) Purple1 else Purple80,
+                    unfocusedIndicatorColor = if (isFilled) Purple1 else Purple80,
                     cursorColor = Color.White
                 )
             )

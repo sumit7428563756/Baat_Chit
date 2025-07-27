@@ -18,6 +18,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import app.chat.baat_chit.data.model.User
+import app.chat.baat_chit.data.model.sample
+import app.chat.baat_chit.data.model.sampleList
 import app.chat.baat_chit.ui.theme.Purple1
 import app.chat.baat_chit.view.Settings.Settings
 import app.chat.baat_chit.view.authentication.First
@@ -76,7 +78,7 @@ fun Nav(user: List<User>) {
                 Calls(navController = navcontroller)
             }
             composable(Screens.Settings.route) {
-                Settings(navController = navcontroller)
+                Settings(navController = navcontroller, user = user.first())
             }
 
         }

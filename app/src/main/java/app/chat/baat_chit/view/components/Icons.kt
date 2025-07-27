@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import app.chat.baat_chit.ui.theme.Purple1
 import app.chat.baat_chit.ui.theme.Purple80
 import app.chat.baat_chit.ui.theme.gradientBrush
 
@@ -36,17 +37,33 @@ fun BoxIcon(icon : Painter,tint : Color, onClick : () -> Unit){
 
 }
 
+
+@Composable
+fun BoxIcon2(icon : Painter,tint : Color, onClick : () -> Unit){
+
+    Box(modifier = Modifier
+        .size(40.dp)
+        .background(Purple1, CircleShape)
+        .clickable { onClick() }
+        .clip(CircleShape),
+        contentAlignment = Alignment.Center){
+        Icon(painter = icon, tint = tint, contentDescription = null,
+            modifier = Modifier.size(25.dp))
+    }
+
+}
+
 @Composable
 fun ChatMessage(text : String){
 
     Box(modifier = Modifier
-        .size(12.dp)
+        .size(20.dp)
         .background(gradientBrush, CircleShape)
         .clip(CircleShape),
         contentAlignment = Alignment.Center){
        Text(text = text,
            fontWeight = FontWeight.SemiBold,
-           fontSize = 10.sp,
+           fontSize = 14.sp,
            color = Color.White)
     }
 

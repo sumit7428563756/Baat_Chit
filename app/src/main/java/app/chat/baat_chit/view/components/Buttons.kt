@@ -15,13 +15,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.chat.baat_chit.ui.theme.Purple
+import app.chat.baat_chit.ui.theme.Purple1
 
 @Composable
 fun LoginButton(name : String,onClick : () -> Unit){
     Button(
         onClick = { onClick() },
         colors = ButtonDefaults.buttonColors(
-            containerColor = Purple,
+            containerColor = Purple1,
             contentColor = Color.White
         ),
         modifier = Modifier

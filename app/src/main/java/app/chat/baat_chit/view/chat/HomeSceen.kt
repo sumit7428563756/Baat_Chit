@@ -59,130 +59,6 @@ import app.chat.baat_chit.view.components.BoxIcon
 import app.chat.baat_chit.view.components.ChatMessage
 import app.chat.baat_chit.view.components.Searchbar
 import coil.compose.rememberAsyncImagePainter
-//
-//@Composable
-//fun HomeScreen(user: User, navController: NavController) {
-//
-//    var sheetHeight by remember { mutableStateOf(260.dp) }
-//    val animatedHeight by animateDpAsState(targetValue = sheetHeight, label = "sheetHeight")
-//
-//    val dragState = rememberDraggableState { delta ->
-//        val newHeight = sheetHeight - delta.dp
-//        sheetHeight = newHeight.coerceIn(800.dp, 1400.dp)
-//    }
-//    var searchText by remember { mutableStateOf("") }
-//
-//    val filteredUsers = sampleList.filter {
-//        it.name.contains(searchText.trim(), ignoreCase = true)
-//    }
-//    Box(
-//        modifier = Modifier
-//            .fillMaxSize()
-//            .background(Purple1)
-//    ) {
-//        Column(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .padding(top = 40.dp)
-//        ) {
-//            Row(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(horizontal = 20.dp),
-//                verticalAlignment = Alignment.CenterVertically,
-//                horizontalArrangement = Arrangement.SpaceBetween
-//            ) {
-//                Row(
-//                    verticalAlignment = Alignment.CenterVertically
-//                ) {
-//                    Img(user = user)
-//                    Spacer(modifier = Modifier.width(12.dp))
-//                    Column {
-//                        Text(
-//                            text = "Good morning,",
-//                            fontSize = 14.sp,
-//                            fontWeight = FontWeight.SemiBold,
-//                            color = Color.White,
-//                            textAlign = TextAlign.Start
-//                        )
-//                        Text(
-//                            text = user.name,
-//                            fontSize = 16.sp,
-//                            fontWeight = FontWeight.Bold,
-//                            color = Color.White,
-//                            textAlign = TextAlign.Start
-//                        )
-//                    }
-//                }
-//                BoxIcon(
-//                    icon = painterResource(id = R.drawable.plus),
-//                    tint = Color.Unspecified,
-//                    onClick = {})
-//            }
-//            Spacer(modifier = Modifier.height(30.dp))
-//            AllStories()
-//        }
-//
-//
-//        Box(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .align(Alignment.BottomCenter)
-//                .draggable(
-//                    orientation = Orientation.Vertical,
-//                    state = dragState,
-//                    onDragStopped = {
-//                        // Snap behavior
-//                        sheetHeight = if (sheetHeight < 850.dp) 800.dp else 1400.dp
-//                    }
-//                )
-//        ) {
-//            Box(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .height(animatedHeight)
-//                    .clip(RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp))
-//                    .background(Color.White)
-//            ) {
-//                // Handle
-//                Box(
-//                    modifier = Modifier
-//                        .align(Alignment.TopCenter)
-//                        .padding(10.dp)
-//                ) {
-//                    Icon(
-//                        painter = painterResource(
-//                            id = if (sheetHeight < 850.dp) R.drawable.up else R.drawable.down
-//                        ),
-//                        contentDescription = null,
-//                        tint = Purple80,
-//                        modifier = Modifier
-//                            .width(40.dp)
-//                    )
-//                }
-//                Column(
-//                    modifier = Modifier
-//                        .fillMaxSize()
-//                        .padding(top = 50.dp)
-//                        .padding(horizontal = 20.dp)
-//                ) {
-//                    Text(
-//                        text = "Chat",
-//                        fontSize = 22.sp,
-//                        fontWeight = FontWeight.Bold,
-//                        color = Color.Black
-//                    )
-//                    Spacer(modifier = Modifier.height(20.dp))
-//                    Searchbar(text = searchText) {
-//                        searchText = it
-//                    }
-//                }
-//                Spacer(modifier = Modifier.height(20.dp))
-//                ChatColumn(filteredUsers)
-//            }
-//        }
-//    }
-//}
 
 @Composable
 fun HomeScreen(user: User, navController: NavController) {
@@ -209,7 +85,6 @@ fun HomeScreen(user: User, navController: NavController) {
             .fillMaxSize()
             .background(Purple1)
     ) {
-        // Top content
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -458,7 +333,7 @@ fun ChatItem(user: User, onClick: () -> Unit) {
                             overflow = TextOverflow.Clip,
                         )
                     }
-                    user.about.let {
+                    user.lastmsg.let {
                         Text(
                             text = it,
                             style = MaterialTheme.typography.headlineSmall.copy(

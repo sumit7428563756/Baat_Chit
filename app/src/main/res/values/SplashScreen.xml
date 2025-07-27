@@ -3,7 +3,7 @@
 
     <style name="Theme.SplashScreen.BaatChitSplash" parent="Theme.SplashScreen.IconBackground">
 
-        <item name="windowSplashScreenBackground">#270046</item>
+        <item name="windowSplashScreenBackground">#6F3FBF</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/batlogo</item>
         <item name="postSplashScreenTheme">@style/Theme.SplashScreen.BaatChitSplash</item>
 
