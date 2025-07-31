@@ -17,12 +17,16 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import app.chat.baat_chit.data.model.Country
 import app.chat.baat_chit.data.model.User
+import app.chat.baat_chit.data.model.countries
 import app.chat.baat_chit.data.model.sample
 import app.chat.baat_chit.data.model.sampleList
 import app.chat.baat_chit.ui.theme.Purple1
 import app.chat.baat_chit.view.Settings.Settings
+import app.chat.baat_chit.view.authentication.CountryListScreen
 import app.chat.baat_chit.view.authentication.First
+import app.chat.baat_chit.view.authentication.FirstScreen
 import app.chat.baat_chit.view.authentication.OtpScreen
 import app.chat.baat_chit.view.authentication.Success
 import app.chat.baat_chit.view.calls.Calls
@@ -35,6 +39,17 @@ fun Nav(user: List<User>) {
     val navBackStackEntry by navcontroller.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
     var selectedIndex = items.indexOfFirst { it.route == currentRoute }.coerceAtLeast(0)
+
+
+    val selectedCountry = remember { mutableStateOf("United States[]+1") }
+
+    val searchCountryList = remember {
+        mutableStateOf(
+            countries.map {
+                Country(it.name, it.code, icon = mutableStateOf(false), selected = mutableStateOf(it.code == "+1" && it.name == "United States"))
+            }
+        )
+    }
 
     val bottomBarRoutes = listOf(
         Screens.Home.route,
@@ -62,7 +77,7 @@ fun Nav(user: List<User>) {
             modifier = Modifier.padding(innerpadding)
         ) {
             composable(Screens.FirstScreen.route) {
-                First(navController = navcontroller)
+               FirstScreen(navController = navcontroller, searchCountryList = searchCountryList , selectedCountry = selectedCountry )
             }
             composable("otpscreen_route/{number}") { backStackEntry ->
                 val number = backStackEntry.arguments?.getString("number") ?: ""
@@ -80,7 +95,10 @@ fun Nav(user: List<User>) {
             composable(Screens.Settings.route) {
                 Settings(navController = navcontroller, user = user.first())
             }
-
+            composable(
+                Screens.CountryListScreen.route) {
+                CountryListScreen(navcontroller,selectedCountry = selectedCountry)
+            }
         }
     }
 
@@ -101,6 +119,7 @@ sealed class Screens(val route: String, val label: String) {
     object Home : Screens("home_route", "Home")
     object Calls : Screens("calls_route", "Calls")
     object Settings : Screens("settings_route", "Settings")
+    object   CountryListScreen : Screens("countrylistscreen_route", "CountryListScreen")
 }
 
 
