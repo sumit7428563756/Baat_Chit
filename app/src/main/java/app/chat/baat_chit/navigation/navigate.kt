@@ -31,6 +31,7 @@ import app.chat.baat_chit.view.authentication.OtpScreen
 import app.chat.baat_chit.view.authentication.Success
 import app.chat.baat_chit.view.calls.Calls
 import app.chat.baat_chit.view.chat.HomeScreen
+import app.chat.baat_chit.view.components.ContactListScreen
 
 @Composable
 fun Nav(user: List<User>) {
@@ -99,6 +100,7 @@ fun Nav(user: List<User>) {
                 Screens.CountryListScreen.route) {
                 CountryListScreen(navcontroller,selectedCountry = selectedCountry)
             }
+
         }
     }
 
@@ -120,6 +122,7 @@ sealed class Screens(val route: String, val label: String) {
     object Calls : Screens("calls_route", "Calls")
     object Settings : Screens("settings_route", "Settings")
     object   CountryListScreen : Screens("countrylistscreen_route", "CountryListScreen")
+    object   ContactListScreen : Screens("contactlistscreen_route", "ContactListScreen")
 }
 
 

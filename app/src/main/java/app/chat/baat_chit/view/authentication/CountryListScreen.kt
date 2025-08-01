@@ -2,6 +2,7 @@ package app.chat.baat_chit.view.authentication
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -17,8 +18,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -51,12 +55,28 @@ fun CountryListScreen(
 
 
     Column {
-        Row(modifier = Modifier.height(40.dp)
-            .fillMaxWidth().background(Purple1)
-            .padding(10.dp)) {
-            Button(onClick = {navController.popBackStack() }) {
-                Icon(painter = painterResource(id = R.drawable.back2), tint = Color.White, contentDescription = null,
-                    modifier = Modifier.size(30.dp))
+        Row(
+            modifier = Modifier
+                .height(60.dp)
+                .fillMaxWidth()
+                .background(Purple1),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Button(
+                onClick = { navController.popBackStack() },
+                shape = CircleShape, colors = ButtonDefaults.buttonColors(
+                    containerColor = Purple1, contentColor = Color.White
+                )
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.back2),
+                    tint = Color.White,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .background(Purple1)
+                        .size(30.dp)
+                )
             }
 
         }

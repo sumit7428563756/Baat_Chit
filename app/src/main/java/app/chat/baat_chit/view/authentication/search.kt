@@ -241,11 +241,11 @@ fun AnimatedTopSearchBar(
         leadingIcon = {
             Icon(
                 painter = painterResource(id = R.drawable.search),
-                tint = Color.Unspecified,
+                tint = Purple1,
                 contentDescription = null
             )
         },
-        placeholder = { Text("Search Country", color = Color.White) },
+        placeholder = { Text("Search Country", color = Purple1) },
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 20.dp, vertical = 20.dp)

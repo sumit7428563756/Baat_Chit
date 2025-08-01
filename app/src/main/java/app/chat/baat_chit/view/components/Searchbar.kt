@@ -2,6 +2,7 @@ package app.chat.baat_chit.view.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -84,3 +85,66 @@ fun Searchbar( text: String,
         )
     }
 }
+
+
+
+
+@Composable
+fun Searchbar2( text: String,
+               onTextChange: (String) -> Unit) {
+
+
+    val focusManager = LocalFocusManager.current
+    val focusRequester = remember { FocusRequester() }
+
+    Column {
+        OutlinedTextField(
+            value = text,
+            onValueChange =  onTextChange ,
+            keyboardOptions = KeyboardOptions.Default.copy(
+                capitalization = KeyboardCapitalization.None,
+                keyboardType = KeyboardType.Password,
+                imeAction = ImeAction.Next
+            ),
+            keyboardActions = KeyboardActions(
+                onNext = {
+                    focusManager.moveFocus(FocusDirection.Down)
+                }
+            ),
+            placeholder = { Text("Search name or number", color = Color.Gray) },
+            leadingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.search),
+                    tint = Color.Gray,
+                    contentDescription = null
+                )
+            },
+            trailingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.mic),
+                    tint = Color.Gray,
+                    contentDescription = null
+                )
+            },
+            modifier = Modifier
+                .fillMaxWidth().imePadding()
+                .focusRequester(focusRequester),
+            colors = TextFieldDefaults.colors(
+                focusedTextColor = Purple1,
+                unfocusedTextColor = Purple1,
+                focusedContainerColor = Color.White,
+                errorContainerColor = Color.Red,
+                unfocusedContainerColor = Color.White,
+                unfocusedIndicatorColor = Purple1,
+                focusedIndicatorColor = Purple1,
+                cursorColor = Purple1,
+                focusedSupportingTextColor = Purple80,
+                unfocusedSupportingTextColor = Purple80,
+            ),
+            singleLine = true,
+            shape = RoundedCornerShape(15.dp)
+        )
+    }
+}
+
+

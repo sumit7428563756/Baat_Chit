@@ -27,9 +27,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -51,15 +54,18 @@ import app.chat.baat_chit.R
 import app.chat.baat_chit.data.model.User
 import app.chat.baat_chit.data.model.sample
 import app.chat.baat_chit.data.model.sampleList
+import app.chat.baat_chit.navigation.Screens
 import app.chat.baat_chit.ui.theme.PureWhite
 import app.chat.baat_chit.ui.theme.Purple1
 import app.chat.baat_chit.ui.theme.Purple80
 import app.chat.baat_chit.ui.theme.gradientBrush
 import app.chat.baat_chit.view.components.BoxIcon
 import app.chat.baat_chit.view.components.ChatMessage
+import app.chat.baat_chit.view.components.ContactListScreen
 import app.chat.baat_chit.view.components.Searchbar
 import coil.compose.rememberAsyncImagePainter
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(user: User, navController: NavController) {
 
@@ -68,6 +74,8 @@ fun HomeScreen(user: User, navController: NavController) {
 
     var sheetHeight by remember { mutableStateOf(minHeight) }
     val animatedHeight by animateDpAsState(targetValue = sheetHeight, label = "sheetHeight")
+    var showSheet by remember { mutableStateOf(false) }
+    val state = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
     val dragState = rememberDraggableState { delta ->
         val newHeight = sheetHeight - delta.dp
@@ -108,7 +116,7 @@ fun HomeScreen(user: User, navController: NavController) {
                 BoxIcon(
                     icon = painterResource(id = R.drawable.plus),
                     tint = Color.Unspecified,
-                    onClick = {}
+                    onClick = { showSheet = true }
                 )
             }
 
@@ -140,7 +148,8 @@ fun HomeScreen(user: User, navController: NavController) {
             ) {
                 Column(
                     modifier = Modifier
-                        .fillMaxSize().padding(top = 10.dp)
+                        .fillMaxSize()
+                        .padding(top = 10.dp)
                 ) {
                     Box(
                         modifier = Modifier
@@ -157,7 +166,8 @@ fun HomeScreen(user: User, navController: NavController) {
 
                     Column(
                         modifier = Modifier
-                            .fillMaxWidth().padding(horizontal = 20.dp)
+                            .fillMaxWidth()
+                            .padding(horizontal = 20.dp)
                     ) {
                         Text(
                             "Chat",
@@ -174,11 +184,22 @@ fun HomeScreen(user: User, navController: NavController) {
                         Spacer(modifier = Modifier.height(20.dp))
                         ChatColumn(filteredUsers,  modifier = Modifier
                             .weight(1f)
-                            .fillMaxWidth().background(PureWhite))
+                            .fillMaxWidth()
+                            .background(PureWhite))
                     }
                 }
             }
 
+        if (showSheet) {
+            ModalBottomSheet(
+                onDismissRequest = { showSheet = false },
+                sheetState = state,
+                shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp),
+                containerColor = Color.White,
+            ) {
+                 ContactListScreen()
+            }
+        }
     }
 }
 

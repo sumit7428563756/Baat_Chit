@@ -1,5 +1,7 @@
 package app.chat.baat_chit.view.calls
 
+import android.content.Context
+import android.content.pm.PackageManager
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -16,9 +18,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,16 +33,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import app.chat.baat_chit.R
 import app.chat.baat_chit.data.model.User
 import app.chat.baat_chit.data.model.sampleList
+import app.chat.baat_chit.navigation.Screens
 import app.chat.baat_chit.ui.theme.PureWhite
 import app.chat.baat_chit.ui.theme.Purple1
 import app.chat.baat_chit.ui.theme.Purple80
@@ -46,18 +55,21 @@ import app.chat.baat_chit.view.chat.Img
 import app.chat.baat_chit.view.components.BoxIcon
 import app.chat.baat_chit.view.components.BoxIcon2
 import app.chat.baat_chit.view.components.ChatMessage
+import app.chat.baat_chit.view.components.ContactListCallScreen
+import app.chat.baat_chit.view.components.ContactListScreen
 import app.chat.baat_chit.view.components.Searchbar
 import coil.compose.rememberAsyncImagePainter
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Calls(navController: NavController) {
 
     var searchText by remember { mutableStateOf("") }
-
+    var sheet by remember { mutableStateOf(false) }
     val filteredUsers = sampleList.filter {
         it.name.contains(searchText.trim(), ignoreCase = true)
     }
-
+    val state = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -84,13 +96,15 @@ fun Calls(navController: NavController) {
                 BoxIcon(
                     icon = painterResource(id = R.drawable.plus),
                     tint = Color.Unspecified,
-                    onClick = {}
+                    onClick = { sheet = true }
                 )
             }
             Spacer(modifier = Modifier.height(20.dp))
-            Column(modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 20.dp)) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp)
+            ) {
                 Searchbar(text = searchText) {
                     searchText = it
                 }
@@ -107,9 +121,21 @@ fun Calls(navController: NavController) {
         ) {
             Column(
                 modifier = Modifier
-                    .fillMaxSize().padding(top = 30.dp)
+                    .fillMaxSize()
+                    .padding(top = 30.dp)
             ) {
                 CallColumn(user = filteredUsers, modifier = Modifier.fillMaxWidth())
+            }
+        }
+
+        if (sheet) {
+            ModalBottomSheet(
+                onDismissRequest = { sheet = false },
+                sheetState = state,
+                shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp),
+                containerColor = Color.White,
+            ) {
+                ContactListCallScreen()
             }
         }
 
@@ -170,7 +196,7 @@ fun CallItem(user: User, onClick: () -> Unit) {
 
             Spacer(modifier = Modifier.width(20.dp))
 
-            // Name and icons together in a Row with space between
+
             Row(
                 modifier = Modifier.weight(1f),
                 verticalAlignment = Alignment.CenterVertically,
@@ -191,16 +217,18 @@ fun CallItem(user: User, onClick: () -> Unit) {
                 // Call and video icons
                 Row {
                     BoxIcon2(
-                        icon = painterResource(id = R.drawable.calls),
+                        icon = painterResource(id = R.drawable.video),
                         tint = Color.White
                     ) {}
 
                     Spacer(modifier = Modifier.width(10.dp))
 
                     BoxIcon2(
-                        icon = painterResource(id = R.drawable.video),
+                        icon = painterResource(id = R.drawable.calls),
                         tint = Color.White
-                    ) {}
+                    ) {
+
+                    }
                 }
             }
         }
