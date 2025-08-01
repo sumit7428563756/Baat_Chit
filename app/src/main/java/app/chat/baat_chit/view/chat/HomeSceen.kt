@@ -106,7 +106,9 @@ fun HomeScreen(user: User, navController: NavController) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Img(user = user)
+                    Img(user = user){
+                        navController.navigate(Screens.Settings.route)
+                    }
                     Spacer(modifier = Modifier.width(12.dp))
                     Column {
                         Text("Good morning,", fontSize = 14.sp, fontWeight = FontWeight.SemiBold, color = Color.White)
@@ -206,10 +208,10 @@ fun HomeScreen(user: User, navController: NavController) {
 
 
 @Composable
-fun Img(user: User) {
+fun Img(user: User,onImage: () -> Unit) {
     Box(
         modifier = Modifier
-            .size(60.dp)
+            .size(60.dp).clickable { onImage()  }
             .clip(CircleShape)
     ) {
         Image(
