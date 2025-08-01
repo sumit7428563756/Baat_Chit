@@ -227,7 +227,7 @@ fun ContactListCallScreen() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "New Chat",
+                text = "New Call",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 color = Purple1

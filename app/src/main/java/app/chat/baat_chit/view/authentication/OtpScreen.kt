@@ -118,7 +118,7 @@ fun OtpScreen(navController: NavController, number: String) {
                     color = Color.Black
                 )
                 TextButton(
-                    onClick = { navController.navigate(Screens.Success.route) },
+                    onClick = { navController.navigate(Screens.Name.route) },
                     contentPadding = PaddingValues(0.dp)
                 ) {
                     Text(
@@ -143,7 +143,7 @@ fun OtpScreen(navController: NavController, number: String) {
                 if (otpCode.length < 6) {
                     Toast.makeText(context, "Please fill the OTP code", Toast.LENGTH_SHORT).show()
                 } else {
-                    navController.navigate(Screens.Success.route)
+                    navController.navigate(Screens.Name.route)
                 }
             }
         }

@@ -24,6 +24,8 @@ import app.chat.baat_chit.data.model.sample
 import app.chat.baat_chit.data.model.sampleList
 import app.chat.baat_chit.ui.theme.Purple1
 import app.chat.baat_chit.view.Settings.Settings
+import app.chat.baat_chit.view.account.Name
+import app.chat.baat_chit.view.account.UploadPhoto
 import app.chat.baat_chit.view.authentication.CountryListScreen
 import app.chat.baat_chit.view.authentication.First
 import app.chat.baat_chit.view.authentication.FirstScreen
@@ -97,6 +99,12 @@ fun Nav(user: List<User>) {
             composable(Screens.Settings.route) {
                 Settings(navController = navcontroller, user = user.first())
             }
+            composable(Screens.Name.route) {
+                Name(navController = navcontroller)
+            }
+            composable(Screens.UploadPhoto.route) {
+                UploadPhoto(navController = navcontroller, user = user.first())
+            }
             composable(
                 Screens.CountryListScreen.route) {
                 CountryListScreen(navcontroller,selectedCountry = selectedCountry)
@@ -123,7 +131,8 @@ sealed class Screens(val route: String, val label: String) {
     object Calls : Screens("calls_route", "Calls")
     object Settings : Screens("settings_route", "Settings")
     object   CountryListScreen : Screens("countrylistscreen_route", "CountryListScreen")
-    object   ContactListScreen : Screens("contactlistscreen_route", "ContactListScreen")
+    object   Name : Screens("name_route", "Name")
+    object   UploadPhoto : Screens("uploadphoto_route", "UploadPhoto")
 }
 
 

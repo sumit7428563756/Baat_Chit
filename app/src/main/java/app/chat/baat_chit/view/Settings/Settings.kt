@@ -163,7 +163,7 @@ fun Settings(navController: NavController, user: User) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = 20.dp),
+                .padding(top = 10.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Row(
