@@ -202,7 +202,7 @@ fun Settings(navController: NavController, user: User) {
             Spacer(modifier = Modifier.height(20.dp))
             TextButton(onClick = { show = true }) {
                 Text(
-                    text = "Edit",
+                    text = "Change Photo",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.White
