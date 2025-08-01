@@ -70,6 +70,7 @@ fun BottomNavigationBar(
     navController: NavController,
     items: List<BottomItems>,
     selectedIndex: Int,
+    bottomNavStartRoute: String = Screens.Home.route
 ) {
     Surface(
         tonalElevation = 10.dp,
@@ -92,12 +93,13 @@ fun BottomNavigationBar(
                         .weight(1f)
                         .clickable {
                             navController.navigate(item.route) {
-                                popUpTo(navController.graph.startDestinationId) {
+                                popUpTo(bottomNavStartRoute) {
                                     saveState = true
                                 }
                                 launchSingleTop = true
                                 restoreState = true
                             }
+
                         },
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center

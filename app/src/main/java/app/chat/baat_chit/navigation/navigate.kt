@@ -68,7 +68,8 @@ fun Nav(user: List<User>) {
             BottomNavigationBar(
                 navController = navcontroller,
                 items = items,
-                selectedIndex = selectedIndex
+                selectedIndex = selectedIndex,
+                bottomNavStartRoute = Screens.Home.route
             )
         }
     }) { innerpadding ->

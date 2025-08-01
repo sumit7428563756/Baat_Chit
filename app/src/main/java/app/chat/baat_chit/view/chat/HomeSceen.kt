@@ -107,7 +107,9 @@ fun HomeScreen(user: User, navController: NavController) {
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Img(user = user){
-                        navController.navigate(Screens.Settings.route)
+                        navController.navigate(Screens.Settings.route) {
+                            popUpTo(Screens.Home.route) { inclusive = true }
+                        }
                     }
                     Spacer(modifier = Modifier.width(12.dp))
                     Column {

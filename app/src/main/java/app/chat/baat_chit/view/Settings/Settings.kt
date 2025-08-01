@@ -205,7 +205,7 @@ fun Settings(navController: NavController, user: User) {
                     text = "Edit",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Purple80
+                    color = Color.White
                 )
             }
             Spacer(modifier = Modifier.height(20.dp))
