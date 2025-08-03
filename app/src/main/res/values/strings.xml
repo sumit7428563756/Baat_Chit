@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Baat_Chit</string>
+    <string name="opttext">We have already sent the 6 digit code to \n ${}.plsese fill in the box below</string>
+</resources>
