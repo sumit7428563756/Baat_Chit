@@ -58,6 +58,8 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import app.chat.baat_chit.R
+import app.chat.baat_chit.data.model.User
+import app.chat.baat_chit.navigation.Screens
 import app.chat.baat_chit.ui.theme.PureWhite
 import app.chat.baat_chit.ui.theme.Purple1
 import app.chat.baat_chit.ui.theme.Purple80
@@ -285,7 +287,7 @@ fun ContactListCallScreen() {
                             icon = painterResource(id = R.drawable.video),
                             tint = Color.White
                         ) {
-
+//                            navController.navigate("${Screens.VideoCall.route}/${user.uid}")
                         }
 
                         Spacer(modifier = Modifier.width(10.dp))
@@ -294,7 +296,7 @@ fun ContactListCallScreen() {
                             icon = painterResource(id = R.drawable.calls),
                             tint = Color.White
                         ) {
-
+//                            navController.navigate("${Screens.AudioCall.route}/${user.uid}")
                         }
                     }
                 }

@@ -53,10 +53,24 @@ android {
 }
 
 dependencies {
-     //Crop Image
-    dependencies {
+
+    implementation ("com.google.accompanist:accompanist-permissions:0.30.1")
+
+    //cameraX
+    implementation("androidx.camera:camera-camera2:1.4.2")
+    implementation("androidx.camera:camera-lifecycle:1.4.2")
+    implementation("androidx.camera:camera-view:1.4.2")
+    implementation("androidx.camera:camera-video:1.4.2")
+    implementation("androidx.camera:camera-core:1.4.2")
+    implementation("androidx.camera:camera-extensions:1.4.2")
+
+// For CameraX PreviewView in Compose
+    implementation("androidx.camera:camera-view:1.4.2")
+    implementation("androidx.compose.runtime:runtime-livedata:1.8.3")
+
+
+    //Crop Image
         implementation("com.github.CanHub:Android-Image-Cropper:4.3.2")
-    }
 
     //Coil
     implementation("io.coil-kt:coil-compose:2.5.0")

@@ -2,8 +2,6 @@ package app.chat.baat_chit.view.Settings
 
 import android.Manifest
 import android.net.Uri
-import android.os.Build
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -35,7 +33,6 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -64,14 +61,9 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavController
 import app.chat.baat_chit.R
 import app.chat.baat_chit.data.model.User
-import app.chat.baat_chit.data.model.sample
 import app.chat.baat_chit.ui.theme.Purple1
 import app.chat.baat_chit.ui.theme.Purple80
-import app.chat.baat_chit.view.chat.Img
-import app.chat.baat_chit.view.components.BoxIcon
-import app.chat.baat_chit.view.components.ContactListScreen
 import app.chat.baat_chit.view.components.createImageUri
-import app.chat.baat_chit.view.components.saveImageToGallery
 import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
 import com.canhub.cropper.CropImageContract

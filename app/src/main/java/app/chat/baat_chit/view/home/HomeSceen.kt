@@ -1,4 +1,4 @@
-package app.chat.baat_chit.view.chat
+package app.chat.baat_chit.view.home
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
@@ -11,7 +11,6 @@ import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,10 +22,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -43,22 +40,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import app.chat.baat_chit.R
 import app.chat.baat_chit.data.model.User
-import app.chat.baat_chit.data.model.sample
 import app.chat.baat_chit.data.model.sampleList
 import app.chat.baat_chit.navigation.Screens
 import app.chat.baat_chit.ui.theme.PureWhite
 import app.chat.baat_chit.ui.theme.Purple1
 import app.chat.baat_chit.ui.theme.Purple80
-import app.chat.baat_chit.ui.theme.gradientBrush
+import app.chat.baat_chit.view.chatactivity.openConversation
 import app.chat.baat_chit.view.components.BoxIcon
 import app.chat.baat_chit.view.components.ChatMessage
 import app.chat.baat_chit.view.components.ContactListScreen
@@ -68,6 +64,8 @@ import coil.compose.rememberAsyncImagePainter
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(user: User, navController: NavController) {
+
+    val context = LocalContext.current
 
     val minHeight = 450.dp
     val maxHeight = 650.dp
@@ -186,10 +184,16 @@ fun HomeScreen(user: User, navController: NavController) {
                         }
                     }
                         Spacer(modifier = Modifier.height(20.dp))
-                        ChatColumn(filteredUsers,  modifier = Modifier
+                    ChatColumn(
+                        users = filteredUsers,
+                        modifier = Modifier
                             .weight(1f)
                             .fillMaxWidth()
-                            .background(PureWhite))
+                            .background(PureWhite),
+                        onUserClick = { userId ->
+                            openConversation(context, userId)
+                        }
+                    )
                     }
                 }
             }
@@ -213,7 +217,8 @@ fun HomeScreen(user: User, navController: NavController) {
 fun Img(user: User,onImage: () -> Unit) {
     Box(
         modifier = Modifier
-            .size(60.dp).clickable { onImage()  }
+            .size(60.dp)
+            .clickable { onImage() }
             .clip(CircleShape)
     ) {
         Image(
@@ -288,6 +293,7 @@ fun Stories(user: User) {
 
 @Composable
 fun AllStories() {
+
     LazyRow(
         modifier = Modifier
             .fillMaxWidth(),
@@ -302,17 +308,34 @@ fun AllStories() {
     }
 }
 
+//
+//@Composable
+//fun ChatColumn(user: User, modifier: Modifier = Modifier) {
+//    val context = LocalContext.current
+//    LazyColumn(modifier = Modifier.fillMaxSize()) {
+//        items(sampleList) { post ->
+//            ChatItem(user = post) {
+//                openConversation(context, userId = user.uid)
+//            }
+//        }
+//    }
+//}
 
 @Composable
-fun ChatColumn(user: List<User>, modifier: Modifier = Modifier) {
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
-        items(user) {
-            ChatItem(user = it) {
-
+fun ChatColumn(
+    users: List<User>,
+    modifier: Modifier = Modifier,
+    onUserClick: (String) -> Unit
+) {
+    LazyColumn(modifier = modifier.fillMaxSize()) {
+        items(users) { user ->
+            ChatItem(user = user) {
+                onUserClick(user.uid)
             }
         }
     }
 }
+
 
 
 @Composable

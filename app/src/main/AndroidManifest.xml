@@ -47,6 +47,7 @@
         <activity
             android:name="com.canhub.cropper.CropImageActivity"
             android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar" />
+        <activity android:name=".view.chatactivity.ConversationActivity" />
 
     </application>
 

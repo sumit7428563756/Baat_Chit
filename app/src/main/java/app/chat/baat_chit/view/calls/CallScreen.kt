@@ -1,7 +1,5 @@
 package app.chat.baat_chit.view.calls
 
-import android.content.Context
-import android.content.pm.PackageManager
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -33,15 +31,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import app.chat.baat_chit.R
 import app.chat.baat_chit.data.model.User
@@ -49,14 +44,9 @@ import app.chat.baat_chit.data.model.sampleList
 import app.chat.baat_chit.navigation.Screens
 import app.chat.baat_chit.ui.theme.PureWhite
 import app.chat.baat_chit.ui.theme.Purple1
-import app.chat.baat_chit.ui.theme.Purple80
-import app.chat.baat_chit.view.chat.ChatColumn
-import app.chat.baat_chit.view.chat.Img
 import app.chat.baat_chit.view.components.BoxIcon
 import app.chat.baat_chit.view.components.BoxIcon2
-import app.chat.baat_chit.view.components.ChatMessage
 import app.chat.baat_chit.view.components.ContactListCallScreen
-import app.chat.baat_chit.view.components.ContactListScreen
 import app.chat.baat_chit.view.components.Searchbar
 import coil.compose.rememberAsyncImagePainter
 
@@ -124,7 +114,7 @@ fun Calls(navController: NavController) {
                     .fillMaxSize()
                     .padding(top = 30.dp)
             ) {
-                CallColumn(user = filteredUsers, modifier = Modifier.fillMaxWidth())
+                CallColumn(user = filteredUsers, modifier = Modifier.fillMaxWidth(),navController)
             }
         }
 
@@ -144,7 +134,7 @@ fun Calls(navController: NavController) {
 
 
 @Composable
-fun CallColumn(user: List<User>, modifier: Modifier = Modifier) {
+fun CallColumn(user: List<User>, modifier: Modifier = Modifier,navController: NavController) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         item {
             Text(
@@ -160,20 +150,18 @@ fun CallColumn(user: List<User>, modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.height(20.dp))
         }
         items(user) {
-            CallItem(user = it) {
-
-            }
+            CallItem(user = it,navController)
         }
     }
 }
 
 @Composable
-fun CallItem(user: User, onClick: () -> Unit) {
+fun CallItem(user: User,navController: NavController) {
     Box(
         modifier = Modifier
             .background(PureWhite)
             .fillMaxWidth()
-            .clickable { onClick() }
+            .clickable { navController.navigate("${Screens.AudioCall.route}/${user.uid}") }
             .height(90.dp),
         contentAlignment = Alignment.Center
     ) {
@@ -219,15 +207,16 @@ fun CallItem(user: User, onClick: () -> Unit) {
                     BoxIcon2(
                         icon = painterResource(id = R.drawable.video),
                         tint = Color.White
-                    ) {}
-
+                    ) {
+                        navController.navigate("${Screens.VideoCall.route}/${user.uid}")
+                    }
                     Spacer(modifier = Modifier.width(10.dp))
 
                     BoxIcon2(
                         icon = painterResource(id = R.drawable.calls),
                         tint = Color.White
                     ) {
-
+                        navController.navigate("${Screens.AudioCall.route}/${user.uid}")
                     }
                 }
             }

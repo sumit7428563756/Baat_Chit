@@ -1,15 +1,12 @@
 package app.chat.baat_chit.navigation
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -20,20 +17,17 @@ import androidx.navigation.navArgument
 import app.chat.baat_chit.data.model.Country
 import app.chat.baat_chit.data.model.User
 import app.chat.baat_chit.data.model.countries
-import app.chat.baat_chit.data.model.sample
-import app.chat.baat_chit.data.model.sampleList
-import app.chat.baat_chit.ui.theme.Purple1
 import app.chat.baat_chit.view.Settings.Settings
 import app.chat.baat_chit.view.account.Name
 import app.chat.baat_chit.view.account.UploadPhoto
 import app.chat.baat_chit.view.authentication.CountryListScreen
-import app.chat.baat_chit.view.authentication.First
 import app.chat.baat_chit.view.authentication.FirstScreen
 import app.chat.baat_chit.view.authentication.OtpScreen
 import app.chat.baat_chit.view.authentication.Success
+import app.chat.baat_chit.view.calls.AudioCall
 import app.chat.baat_chit.view.calls.Calls
-import app.chat.baat_chit.view.chat.HomeScreen
-import app.chat.baat_chit.view.components.ContactListScreen
+import app.chat.baat_chit.view.calls.VideoCall
+import app.chat.baat_chit.view.home.HomeScreen
 
 @Composable
 fun Nav(user: List<User>) {
@@ -109,7 +103,18 @@ fun Nav(user: List<User>) {
                 Screens.CountryListScreen.route) {
                 CountryListScreen(navcontroller,selectedCountry = selectedCountry)
             }
-
+           composable("audiocall_route/{id}", arguments = listOf(navArgument("id"){type = NavType.StringType})){
+               val id = it.arguments?.getString("id")
+               if( id != null){
+                   AudioCall(id,navcontroller)
+               }
+           }
+            composable("videocall_route/{id}", arguments = listOf(navArgument("id"){type = NavType.StringType})){
+                val id = it.arguments?.getString("id")
+                if( id != null){
+                    VideoCall(id,navcontroller)
+                }
+            }
         }
     }
 
@@ -133,6 +138,8 @@ sealed class Screens(val route: String, val label: String) {
     object   CountryListScreen : Screens("countrylistscreen_route", "CountryListScreen")
     object   Name : Screens("name_route", "Name")
     object   UploadPhoto : Screens("uploadphoto_route", "UploadPhoto")
+    object   AudioCall : Screens("audiocall_route", "AudioCall")
+    object   VideoCall : Screens("videocall_route", "VideoCall")
 }
 
 
