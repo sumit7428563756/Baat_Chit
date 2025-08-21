@@ -1,3 +1,17 @@
+ 📸 Screenshots  
+
+![LOGIN](https://github.com/user-attachments/assets/b6f96a84-1ebf-4dac-b9c9-05de537c663c)
+
+
+
+
+
+
+
+
+
+
+
 📱 baat_chit
 
 baat_chit is a real-time chat application built on Firebase for authentication and Firebase Realtime Database for chat synchronization. The app follows MVVM architecture with Dagger Hilt for dependency injection, and Sockets for real-time communication.
